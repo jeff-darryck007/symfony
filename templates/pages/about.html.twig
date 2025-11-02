@@ -1,0 +1,134 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+  {{ include('navBar.html.twig') }}
+     <style>
+    .hero-about {
+      background: url('https://images.unsplash.com/photo-1504198453319-5ce911bafcde') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 120px 20px;
+      position: relative;
+    }
+
+    .hero-about::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-about .content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .team-member img {
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    .mission-section {
+      background-color: #f8f9fa;
+      padding: 60px 0;
+    }
+
+    .cta-section {
+      background-color: #111;
+      color: white;
+      text-align: center;
+      padding: 60px 0;
+    }
+  </style>
+
+    <!-- Bannière -->
+  <section class="hero-about">
+    <div class="content">
+      <h1 class="fw-bold display-5">À propos de notre galerie</h1>
+      <p class="lead">Un espace dédié à la beauté, à la créativité et à l’inspiration.</p>
+    </div>
+  </section>
+
+  <!-- Présentation -->
+  <section class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-md-6 mb-4 mb-md-0">
+        <img src="https://images.unsplash.com/photo-1544717305-996b815c338c" class="img-fluid rounded shadow" alt="Galerie d'art">
+      </div>
+      <div class="col-md-6">
+        <h2 class="fw-bold mb-3">Notre histoire</h2>
+        <p class="text-muted">Fondée par des passionnés d’art, notre galerie est née du désir de rapprocher le public des artistes contemporains.  
+        Nous croyons que chaque œuvre raconte une histoire et mérite d’être découverte par tous.</p>
+        <p class="text-muted">Depuis nos débuts, nous nous efforçons de mettre en avant la diversité artistique, en valorisant la peinture, la sculpture, la photographie et d’autres formes d’expression visuelle.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notre équipe -->
+  <section class="text-center py-5 bg-light">
+    <div class="container">
+      <h2 class="fw-bold mb-5">Notre équipe</h2>
+      <div class="row g-4">
+        <div class="col-md-3 col-sm-6">
+          <div class="team-member">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Membre 1">
+            <h5 class="fw-semibold mt-2">Sophie Martin</h5>
+            <p class="text-muted">Directrice artistique</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="team-member">
+            <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Membre 2">
+            <h5 class="fw-semibold mt-2">Julien Caron</h5>
+            <p class="text-muted">Curateur d’exposition</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="team-member">
+            <img src="https://randomuser.me/api/portraits/women/55.jpg" alt="Membre 3">
+            <h5 class="fw-semibold mt-2">Claire Dupont</h5>
+            <p class="text-muted">Responsable communication</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="team-member">
+            <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Membre 4">
+            <h5 class="fw-semibold mt-2">Lucas Bernard</h5>
+            <p class="text-muted">Développeur Web</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="mission-section text-center">
+    <div class="container">
+      <h2 class="fw-bold mb-4">Notre mission & notre vision</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <p class="lead text-muted">Notre mission est de démocratiser l’accès à l’art en ligne.  
+          Nous voulons que chaque visiteur, amateur ou curieux, puisse explorer les œuvres d’artistes inspirants et découvrir des univers uniques.</p>
+          <p class="text-muted">Notre vision : devenir une référence numérique de la culture visuelle et de la découverte artistique.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Appel à l’action -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="fw-bold mb-4">Rejoignez notre communauté artistique</h2>
+      <p class="lead mb-4">Découvrez, partagez et vivez l’art autrement.</p>
+      <a href="/galerie" class="btn btn-outline-light btn-lg">Explorer la galerie</a>
+    </div>
+  </section>
+
+  {{ include('footer.html.twig') }}
+
+{% endblock %}

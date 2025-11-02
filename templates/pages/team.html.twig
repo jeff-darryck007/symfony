@@ -1,0 +1,183 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+  {{ include('navBar.html.twig') }}
+
+  <style>
+    /* Bannière */
+    .hero-team {
+      background: url('https://images.unsplash.com/photo-1529101091764-c3526daf38fe') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 120px 20px;
+      position: relative;
+    }
+
+    .hero-team::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-team .content {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Cartes membres */
+    .team-card {
+      border: none;
+      background: white;
+      text-align: center;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .team-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+
+    .team-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+
+    .team-card .card-body {
+      padding: 20px;
+    }
+
+    .social-icons a {
+      color: #555;
+      margin: 0 8px;
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: #111;
+    }
+
+    /* Section vision */
+    .vision-section {
+      background-color: #f8f9fa;
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .vision-section p {
+      color: #555;
+    }
+
+    /* Section CTA */
+    .cta-section {
+      background-color: #111;
+      color: white;
+      text-align: center;
+      padding: 60px 0;
+    }
+  </style>
+
+
+    <!-- Bannière -->
+  <section class="hero-team">
+    <div class="content">
+      <h1 class="fw-bold display-5">Notre équipe</h1>
+      <p class="lead">Des passionnés unis par l’amour de l’art et du numérique.</p>
+    </div>
+  </section>
+
+  <!-- Équipe principale -->
+  <section class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Rencontrez notre équipe</h2>
+      <p class="text-muted">Chaque membre apporte son talent unique pour faire vivre notre galerie d’art en ligne.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-6">
+        <div class="team-card">
+          <img src="https://randomuser.me/api/portraits/women/40.jpg" alt="Membre 1">
+          <div class="card-body">
+            <h5 class="fw-semibold">Sophie Martin</h5>
+            <p class="text-muted mb-2">Directrice artistique</p>
+            <div class="social-icons">
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="team-card">
+          <img src="https://randomuser.me/api/portraits/men/50.jpg" alt="Membre 2">
+          <div class="card-body">
+            <h5 class="fw-semibold">Julien Caron</h5>
+            <p class="text-muted mb-2">Curateur d’exposition</p>
+            <div class="social-icons">
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+              <a href="#"><i class="bi bi-facebook"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="team-card">
+          <img src="https://randomuser.me/api/portraits/women/55.jpg" alt="Membre 3">
+          <div class="card-body">
+            <h5 class="fw-semibold">Claire Dupont</h5>
+            <p class="text-muted mb-2">Responsable communication</p>
+            <div class="social-icons">
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="team-card">
+          <img src="https://randomuser.me/api/portraits/men/35.jpg" alt="Membre 4">
+          <div class="card-body">
+            <h5 class="fw-semibold">Lucas Bernard</h5>
+            <p class="text-muted mb-2">Développeur Web</p>
+            <div class="social-icons">
+              <a href="#"><i class="bi bi-github"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vision / Valeurs -->
+  <section class="vision-section">
+    <div class="container">
+      <h2 class="fw-bold mb-4">Notre philosophie</h2>
+      <p class="lead mb-4">Nous croyons que l’art et la technologie peuvent coexister harmonieusement pour inspirer le monde.</p>
+      <p>Notre équipe combine créativité, innovation et passion pour offrir une expérience artistique immersive et accessible à tous.</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="fw-bold mb-4">Envie de collaborer avec nous ?</h2>
+      <p class="lead mb-4">Rejoignez une équipe dynamique au service de la culture numérique.</p>
+      <a href="/contact" class="btn btn-outline-light btn-lg">Nous contacter</a>
+    </div>
+  </section>
+
+
+  {{ include('footer.html.twig') }}
+
+{% endblock %}
