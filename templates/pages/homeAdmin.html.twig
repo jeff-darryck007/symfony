@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace Administrateur{% endblock %}
+
+{% block body %}
+<div style="display:flex; min-height:100vh; font-family:sans-serif;">
+
+    <!-- Sidebar -->
+    <aside style="width:250px; background:#1e293b; color:white; padding:20px;">
+        <h2>Menu Admin</h2>
+        <ul style="list-style:none; padding:0;">
+            <li><a href="#" style="color:white; text-decoration:none;">🏠 Tableau de bord</a></li>
+            <li><a href="#" style="color:white; text-decoration:none;">🎨 Peintures</a></li>
+            <li><a href="#" style="color:white; text-decoration:none;">🗂️ Catégories</a></li>
+            <li><a href="#" style="color:white; text-decoration:none;">🖌️ Techniques</a></li>
+        </ul>
+    </aside>
+
+    <!-- Contenu principal -->
+    <main style="flex:1; padding:30px; background:#f1f5f9;">
+        <h1>Bienvenue dans l’espace d’administration 👋</h1>
+        <a href="/" style="background:#2563eb; color:white; padding:10px 20px; border-radius:6px; text-decoration:none;">Retour au site</a>
+
+        <h2>Catégories</h2>
+        <ul>
+            {% for category in categories %}
+                <li>{{ category.nom }}</li>
+            {% else %}
+                <li>Aucune catégorie disponible</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Techniques</h2>
+        <ul>
+            {% for technique in techniques %}
+                <li>{{ technique.nom }}</li>
+            {% else %}
+                <li>Aucune technique disponible</li>
+            {% endfor %}
+        </ul>
+
+        <p>Contrôleur : <strong>{{ controller_name }}</strong></p>
+        <p>Date : <strong>{{ "now"|date("d/m/Y H:i") }}</strong></p>
+    </main>
+
+</div>
+{% endblock %}
