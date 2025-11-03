@@ -16,6 +16,22 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
+    /**
+     * Récupère les commentaires liés à un painting donné
+     *
+     * @param int $paintingId L'ID du tableau
+     * @return Comment[]
+     */
+    public function findByPaintingId(int $paintingId): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.idPainting = :painting')
+            ->setParameter('painting', $paintingId)
+            ->orderBy('c.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Comment[] Returns an array of Comment objects
     //     */

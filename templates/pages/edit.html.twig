@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une peinture{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2 class="mb-4">✏️ Modifier la peinture : {{ painting.title }}</h2>
+
+    {# ⚠️ Important : enctype pour le upload #}
+    {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+    
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            {{ form_row(form.title) }}
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form_row(form.created) }}
+        </div>
+
+        <div class="col-md-12 mb-3">
+            {{ form_row(form.description) }}
+        </div>
+
+        <div class="col-md-6 mb-3">
+            {{ form_row(form.height) }}
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form_row(form.width) }}
+        </div>
+
+        <div class="col-md-6 mb-3">
+            {{ form_row(form.idCategory) }}
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form_row(form.idTechnique) }}
+        </div>
+
+        <div class="col-md-6 mb-3">
+            {{ form_row(form.visible) }}
+        </div>
+
+        <div class="col-md-6 mb-3">
+            {{ form_label(form.image, 'Image de la peinture') }}
+            {{ form_widget(form.image) }}
+
+            {# 🖼️ Affiche l'image actuelle si elle existe #}
+            {% if painting.image %}
+                <div class="mt-2">
+                    <p>Image actuelle :</p>
+                    <img src="{{ asset('images/' ~ painting.image) }}" alt="{{ painting.title }}" class="img-thumbnail" style="max-width: 200px;">
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <button class="btn btn-success mt-3">💾 Enregistrer</button>
+    <a href="{{ path('admin_painting_index') }}" class="btn btn-secondary mt-3">↩️ Retour</a>
+
+    {{ form_end(form) }}
+</div>
+{% endblock %}

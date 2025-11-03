@@ -16,13 +16,13 @@ final class HomeController extends AbstractController
         ]);
     } 
 
-    #[Route('/gallery', name: 'app_gallery')]
-    public function gallery(): Response
+    #[Route('/', name: 'app_home2')]
+    public function index2(): Response
     {
-        return $this->render('pages/gallery.html.twig', [
+        return $this->render('pages/home.html.twig', [
             'controller_name' => 'HomeController',
         ]);
-    }
+    } 
 
     #[Route('/about', name: 'app_about')]
     public function about(): Response

@@ -1,47 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Espace Administrateur{% endblock %}
+{% block title %}Administration - Peintures{% endblock %}
 
 {% block body %}
-<div style="display:flex; min-height:100vh; font-family:sans-serif;">
+<div class="container mt-5">
+    <h1 class="mb-4 text-center text-primary">🎨 Gestion des Peintures</h1>
 
-    <!-- Sidebar -->
-    <aside style="width:250px; background:#1e293b; color:white; padding:20px;">
-        <h2>Menu Admin</h2>
-        <ul style="list-style:none; padding:0;">
-            <li><a href="#" style="color:white; text-decoration:none;">🏠 Tableau de bord</a></li>
-            <li><a href="#" style="color:white; text-decoration:none;">🎨 Peintures</a></li>
-            <li><a href="#" style="color:white; text-decoration:none;">🗂️ Catégories</a></li>
-            <li><a href="#" style="color:white; text-decoration:none;">🖌️ Techniques</a></li>
-        </ul>
-    </aside>
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        {% endfor %}
+    {% endfor %}
 
-    <!-- Contenu principal -->
-    <main style="flex:1; padding:30px; background:#f1f5f9;">
-        <h1>Bienvenue dans l’espace d’administration 👋</h1>
-        <a href="/" style="background:#2563eb; color:white; padding:10px 20px; border-radius:6px; text-decoration:none;">Retour au site</a>
+    <table class="table table-striped align-middle shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Titre</th>
+                <th>Visibilité</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for painting in paintings %}
+            <tr>
+                <td>{{ painting.id }}</td>
+                <td><img src="images/{{ painting.image }}" width="100px"></td>
+                <td>{{ painting.title }}</td>
+                <td>
+                    {% if painting.visible %}
+                        <span class="badge bg-success">Visible</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Masquée</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('admin_painting_edit', {id: painting.id}) }}" class="btn btn-sm btn-outline-primary">✏️ Modifier</a>
 
-        <h2>Catégories</h2>
-        <ul>
-            {% for category in categories %}
-                <li>{{ category.nom }}</li>
-            {% else %}
-                <li>Aucune catégorie disponible</li>
-            {% endfor %}
-        </ul>
-
-        <h2>Techniques</h2>
-        <ul>
-            {% for technique in techniques %}
-                <li>{{ technique.nom }}</li>
-            {% else %}
-                <li>Aucune technique disponible</li>
-            {% endfor %}
-        </ul>
-
-        <p>Contrôleur : <strong>{{ controller_name }}</strong></p>
-        <p>Date : <strong>{{ "now"|date("d/m/Y H:i") }}</strong></p>
-    </main>
-
+                    <form action="{{ path('admin_painting_toggle', {id: painting.id}) }}" method="post" style="display:inline;">
+                        <button class="btn btn-sm btn-outline-warning">
+                            {% if painting.visible %}Masquer{% else %}Afficher{% endif %}
+                        </button>
+                    </form>
+                    
+                    <form action="{{ path('admin_painting_delete', {id: painting.id}) }}" method="post" style="display:inline;" onsubmit="return confirm('Supprimer cette peinture ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ painting.id) }}">
+                        <button class="btn btn-sm btn-outline-danger">🗑️ Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5" class="text-center text-muted">Aucune peinture enregistrée.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

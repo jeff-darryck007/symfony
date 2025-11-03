@@ -8,73 +8,43 @@
   <!-- GALERIE -->
   <section id="galerie" class="py-5 mt-5">
     <div class="container">
-      <h2 class="text-center mb-4 fw-bold">Notre gallerie</h2>
-      <div class="row g-4">
-        <div class="col-md-4">
-          <div class="card art-card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1504198458649-3128b932f49b" class="card-img-top" alt="Œuvre 1">
-            <div class="card-body">
-              <h5 class="card-title">Paysage lumineux</h5>
-              <p class="card-text">Une peinture moderne exprimant la liberté et la lumière.</p>
-              <a href="#" class="btn btn-outline-dark btn-sm">Voir détails</a>
+      <h2 class="text-center mb-4 fw-bold">Notre galerie</h2>
+
+      {% if paintings is not empty %}
+        <div class="row g-4">
+          {% for painting in paintings %}
+            <div class="col-md-4">
+              <div class="card art-card shadow-sm h-100">
+                {# ✅ Utilisation de l'image du tableau ou image par défaut #}
+                {% if painting.image %}
+                  <img src="{{ asset('images/' ~ painting.image) }}" class="card-img-top" alt="{{ painting.title }}">
+                {% else %}
+                  <img src="{{ asset('images/default-image.jpg') }}" class="card-img-top" alt="Image manquante">
+                {% endif %}
+
+                <div class="card-body">
+                  <h5 class="card-title">{{ painting.title }}</h5>
+                  <h6 class=""> <b>Catégorie</b>: {{ painting.idCategory.name }}</h6>
+                  <h6 class=""> <b>Technique</b>: {{ painting.idTechnique.name }}</h6>
+                  <p class="card-text">
+                    {{ painting.description|u.truncate(120, '...') }}
+                  </p>
+                  <a href="{{ path('app_painting_show', { id: painting.id }) }}" class="btn btn-outline-dark btn-sm">Voir détails</a>
+                </div>
+
+                <div class="card-footer text-muted text-end small">
+                  Créé le : {{ painting.created ? painting.created|date('d/m/Y') : 'N/A' }}
+                </div>
+              </div>
             </div>
-          </div>
+          {% endfor %}
         </div>
-        <div class="col-md-4">
-          <div class="card art-card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1535905748047-14b2415c3bba" class="card-img-top" alt="Œuvre 2">
-            <div class="card-body">
-              <h5 class="card-title">Portrait abstrait</h5>
-              <p class="card-text">Une fusion d’émotions et de couleurs expressives.</p>
-              <a href="#" class="btn btn-outline-dark btn-sm">Voir détails</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card art-card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1579783902554-4e4011c1e6e0" class="card-img-top" alt="Œuvre 3">
-            <div class="card-body">
-              <h5 class="card-title">Nature silencieuse</h5>
-              <p class="card-text">Un regard poétique sur la beauté du quotidien.</p>
-              <a href="#" class="btn btn-outline-dark btn-sm">Voir détails</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row g-4 mt-3">
-        <div class="col-md-4">
-          <div class="card art-card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1504198458649-3128b932f49b" class="card-img-top" alt="Œuvre 1">
-            <div class="card-body">
-              <h5 class="card-title">Paysage lumineux</h5>
-              <p class="card-text">Une peinture moderne exprimant la liberté et la lumière.</p>
-              <a href="#" class="btn btn-outline-dark btn-sm">Voir détails</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card art-card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1535905748047-14b2415c3bba" class="card-img-top" alt="Œuvre 2">
-            <div class="card-body">
-              <h5 class="card-title">Portrait abstrait</h5>
-              <p class="card-text">Une fusion d’émotions et de couleurs expressives.</p>
-              <a href="#" class="btn btn-outline-dark btn-sm">Voir détails</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card art-card shadow-sm">
-            <img src="https://images.unsplash.com/photo-1579783902554-4e4011c1e6e0" class="card-img-top" alt="Œuvre 3">
-            <div class="card-body">
-              <h5 class="card-title">Nature silencieuse</h5>
-              <p class="card-text">Un regard poétique sur la beauté du quotidien.</p>
-              <a href="#" class="btn btn-outline-dark btn-sm">Voir détails</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      {% else %}
+        <p class="text-center mt-4">Aucune œuvre n’a encore été ajoutée.</p>
+      {% endif %}
     </div>
   </section>
+
 
   {{ include('footer.html.twig') }}
 

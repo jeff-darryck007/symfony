@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ painting.title }} - Détails{% endblock %}
+
+{% block body %}
+
+  {{ include('navBar.html.twig') }}
+
+  <section class="py-5 mt-5">
+    <div class="container">
+      <a href="{{ path('app_admin') }}" class="btn btn-outline-secondary mb-4">← Retour à la galerie</a>
+
+      <div class="row">
+        <div class="col-md-6">
+          {% if painting.image %}
+            <img src="{{ asset('images/' ~ painting.image) }}" class="img-fluid rounded shadow-sm" alt="{{ painting.title }}">
+          {% else %}
+            <img src="{{ asset('images/default-image.jpg') }}" class="img-fluid rounded shadow-sm" alt="Image manquante">
+          {% endif %}
+        </div>
+        <div class="col-md-6">
+          <h2 class="fw-bold">{{ painting.title }}</h2>
+          <p class="text-muted">
+            Créée le {{ painting.created ? painting.created|date('d/m/Y') : 'Date inconnue' }}
+          </p>
+
+          {% if painting.description %}
+            <p class="mt-3">{{ painting.description }}</p>
+          {% endif %}
+
+          <ul class="list-unstyled mt-4">
+            <li><strong>Hauteur :</strong> {{ painting.height }} cm</li>
+            <li><strong>Largeur :</strong> {{ painting.width }} cm</li>
+            <li><strong>Technique :</strong>
+              {{ painting.idTechnique ? painting.idTechnique.name : 'Non spécifiée' }}
+            </li>
+            <li><strong>Catégorie :</strong>
+              {{ painting.idCategory ? painting.idCategory.name : 'Non classée' }}
+            </li>
+          </ul>
+
+          <hr class="my-5">
+
+            <h3 class="fw-bold mb-3">Commentaires</h3>
+
+            {# ✅ Liste des commentaires existants #}
+            {% if comments is not empty %}
+            {% for comment in comments %}
+                <div class="mb-3 p-3 border rounded bg-light">
+                <strong>{{ comment.author }}</strong>
+                <span class="text-muted small"> — {{ comment.createdAt|date('d/m/Y H:i') }}</span>
+                <p class="mb-0 mt-2">{{ comment.content }}</p>
+                </div>
+            {% endfor %}
+            {% else %}
+            <p>Aucun commentaire pour le moment. Soyez le premier à écrire !</p>
+            {% endif %}
+
+            <hr>
+
+            {# ✅ Formulaire d’ajout d’un commentaire #}
+            <h4>Laisser un commentaire</h4>
+            {{ form_start(form) }}
+            <div class="mb-3">
+                {{ form_row(form.author) }}
+            </div>
+            <div class="mb-3">
+                {{ form_row(form.content) }}
+            </div>
+            <button type="submit" class="btn btn-dark">Envoyer</button>
+            {{ form_end(form) }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{ include('footer.html.twig') }}
+
+{% endblock %}

@@ -27,6 +27,9 @@ class Painting
     private ?float $height = null;
 
     #[ORM\Column(nullable: true)]
+    private ?bool $visible = null;
+
+    #[ORM\Column(nullable: true)]
     private ?float $width = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -99,6 +102,18 @@ class Painting
     public function setWidth(?float $width): static
     {
         $this->width = $width;
+
+        return $this;
+    }
+
+    public function getVisible(): ?bool
+    {
+        return $this->visible;
+    }
+
+    public function setVisible(?bool $visible): static
+    {
+        $this->visible = $visible;
 
         return $this;
     }
